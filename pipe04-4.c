@@ -3,7 +3,8 @@
 */
 
 /*Así como esta no funcionaría porque el descriptor de lectura 
-está cerrado para el proceso hijo, porque fue heredado del padre*/
+está cerrado para el proceso hijo, porque fue heredado del padre,
+Solucionado: cerrar el descriptor de lectura dentro de default así no lo hereda el hijo*/
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -33,7 +34,7 @@ int main (){
    if (pipe(ipc) == -1) //Comprueba si hay error al crear la tubería
       exit(-1);
    
-   close(ipc[0]); //cierra descriptor de lectura de la tubería en el proceso padre
+   
    
    switch (fork()){    //Crea proceso hijo
       
@@ -51,6 +52,7 @@ int main (){
          exit(0);
          
       default: 					//Proceso Padre
+      	 close(ipc[0]); 				//cierra descriptor de lectura de la tubería en el proceso padre
          strncpy(buff, DATA, sizeof(DATA));		//copia DATA en buff 
          write(ipc[1], buff, sizeof(DATA));		// escribe en la tubería el contenido de buff 
       

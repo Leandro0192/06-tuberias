@@ -1,0 +1,7 @@
+
+cat: imprime en pantalla el contenido de un archivo
+head: en default imprime en pantalla las primeras 10 lineas 
+tail: en default imprime en pantalla las ultimas 10 lienas
+
+myoutput contien "cdrom"
+ 

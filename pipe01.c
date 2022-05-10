@@ -27,7 +27,7 @@ int main (){
       close(ipc[1]);
       
       leido = read(ipc[0], buff, sizeof(buff));
-      if(leido < 1){
+      if(leido-1 < 1){
          write (STDOUT_FILENO, "\nError al leer tuberia", sizeof("\nError al leer tuberia"));
       }else {
 
@@ -56,7 +56,7 @@ int main (){
    write (STDOUT_FILENO, "\nEscrito en la tuberia: ", sizeof("\nEscrito en la tuberia: "));
    write (STDOUT_FILENO, buff, leido-1);
    printf(", por el proceso padre, pid %d \n", getpid());
-
+   printf("Numero de bits leidos en la tubería %d\n", leido-1);
    exit(0);
 
 }
